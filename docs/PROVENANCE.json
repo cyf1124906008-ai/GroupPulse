@@ -1,0 +1,31 @@
+{
+  "product": "GroupPulse",
+  "generation": "2.x independent application",
+  "applicationLicense": "PolyForm-Noncommercial-1.0.0",
+  "newApplicationModules": [
+    "src/main.cjs",
+    "src/preload.cjs",
+    "src/worker.cjs",
+    "src/ui",
+    "src/core/import.cjs",
+    "src/core/store.cjs",
+    "src/core/market.cjs",
+    "src/core/model.cjs",
+    "src/core/export.cjs",
+    "src/core/media.cjs",
+    "src/core/isaac.cjs"
+  ],
+  "originalProjectModulesContinued": [
+    "src/core/snapshot.cjs",
+    "src/core/media-codec.cjs",
+    "src/core/prices.cjs",
+    "src/core/search-preview.js",
+    "native/key_capture.c",
+    "native/icon.swift",
+    "assets/icon.png",
+    "assets/icon.ico"
+  ],
+  "independentComponents": "See NOTICE.md, runtime-inputs.json and vendor/silk-wasm-origin.json",
+  "priorApplicationPackagesRequired": false,
+  "userDataIncluded": false
+}

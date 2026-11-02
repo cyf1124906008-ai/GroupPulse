@@ -58,4 +58,5 @@ jobs:
             dist/*.sha256
             dist/${{ matrix.platform }}/native-test.json
             dist/${{ matrix.platform }}/build-report.json
+            dist/${{ matrix.platform }}/screenshots/*.png
           if-no-files-found: warn

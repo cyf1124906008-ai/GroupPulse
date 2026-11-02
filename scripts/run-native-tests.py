@@ -17,3 +17,4 @@ if not report.exists():raise RuntimeError('Native test did not produce a result'
 data=json.loads(report.read_text(encoding='utf8'));print(json.dumps(data,ensure_ascii=False,indent=2))
 if result.returncode or not data.get('passed'):raise SystemExit(1)
 shutil.copy2(report,ROOT/'dist'/args.platform/'native-test.json')
+if (test/'profile/screenshots').exists():shutil.copytree(test/'profile/screenshots',ROOT/'dist'/args.platform/'screenshots',dirs_exist_ok=True)

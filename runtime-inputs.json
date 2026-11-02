@@ -1,0 +1,31 @@
+[
+  {
+    "file": "electron-v43.0.0-darwin-arm64.zip",
+    "url": "https://github.com/electron/electron/releases/download/v43.0.0/electron-v43.0.0-darwin-arm64.zip",
+    "sha256": "e6994f68dba65a6371577eaf68ac69a5858d2c52371869837c64affc6157eca5"
+  },
+  {
+    "file": "electron-SHASUMS256.txt",
+    "url": "https://github.com/electron/electron/releases/download/v43.0.0/SHASUMS256.txt",
+    "sha256": "dfceefd04a6b3f0b334775b40a345c4d250166c2b152e45b33080160295749ec"
+  },
+  {
+    "file": "electron-v43.0.0-win32-x64.zip",
+    "url": "https://github.com/electron/electron/releases/download/v43.0.0/electron-v43.0.0-win32-x64.zip",
+    "sha256": "a195f798837e4c5719b462d3210c47619f6fc44ce032d06dbdcfbc88327b26e0"
+  },
+  {
+    "file": "rcedit-x64.exe",
+    "url": "https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe",
+    "sha256": "3e7801db1a5edbec91b49a24a094aad776cb4515488ea5a4ca2289c400eade2a",
+    "source": "https://github.com/electron/rcedit/tree/v2.0.0",
+    "license": "MIT"
+  },
+  {
+    "file": "ffmpeg-8.1.3.tar.xz",
+    "url": "https://ffmpeg.org/releases/ffmpeg-8.1.3.tar.xz",
+    "sha256": "7138d28c96d9d3e3af4ee3d8cad72741f8ffb40da90c1112235dea3ecd3178a3",
+    "source": "https://ffmpeg.org/releases/ffmpeg-8.1.3.tar.xz",
+    "license": "LGPL-2.1-or-later (minimal standalone executable; no GPL/nonfree features)"
+  }
+]

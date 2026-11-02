@@ -1,0 +1,21 @@
+{
+  "name": "grouppulse",
+  "productName": "GroupPulse",
+  "version": "2.0.0",
+  "description": "Independent desktop workspace for local conversations, keyword analysis, supply and demand, price evidence and optional AI.",
+  "main": "src/main.cjs",
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "engines": {
+    "node": ">=24.17.0 <25"
+  },
+  "scripts": {
+    "test": "node --test tests/engine.test.cjs tests/integrity.test.cjs",
+    "start": "electron .",
+    "demo": "electron . --demo",
+    "build:mac": "python3 scripts/build.py --platform macos",
+    "build:windows": "python scripts/build.py --platform windows"
+  },
+  "devDependencies": {
+    "electron": "43.0.0"
+  }
+}

@@ -1,0 +1,6 @@
+* text=auto eol=lf
+vendor/silk-wasm/** -text
+*.png binary
+*.ico binary
+*.hevc binary
+*.wasm binary

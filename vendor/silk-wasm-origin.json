@@ -1,0 +1,19 @@
+{
+  "package": "silk-wasm",
+  "version": "3.7.1",
+  "source": "https://github.com/idranme/silk-wasm",
+  "registry": "https://registry.npmjs.org/silk-wasm/-/silk-wasm-3.7.1.tgz",
+  "integrity": "sha512-mXPwLRtZxrYV3TZx41jMAeKc80wvmyrcXIcs8HctFxK15Ahz2OJQENYhNgEPeCEOdI6Mbx1NxQsqxzwc3DKerw==",
+  "license": "MIT, upstream SILK notices retained",
+  "sourceCommit": "5971995be3ce05d4a1bf820fdf9d7ccdc942e945",
+  "files": {
+    "LICENSE": "3b1585c0e6d9d501e86383948fc0d1734bcb86517a13111d97749c65ad2bfb74",
+    "README.md": "00f00d767766c03906efbeee281e7912f5b94bb04a553d29377d6122f705eede",
+    "package.json": "55f69255696623a29fee616525eab2b9f7aab9f21adf9b667155b68b653410d5",
+    "lib/silk.wasm": "88152af59af535b8056ac806710824b2259a361027451b494f175f48fb39c807",
+    "lib/utils.d.ts": "adb07c215f734561e22dcf50bb22bd7d8a5ea6c8d1cef806cc32f097da0b3321",
+    "lib/index.cjs": "74bb76aba57b1b52787e1eace2870eaaab2deec32241e28f47a138c6b98de065",
+    "lib/index.mjs": "1a95755169e70de059b47a7e7d81a2c3e4f0f0d2ac8d26a8d1d90eaeaac4f937",
+    "lib/index.d.ts": "bc593f9a24fa56a4bb6f425857e793f3a544214b5346f2547a576a259f6a7139"
+  }
+}

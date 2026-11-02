@@ -1,0 +1,14 @@
+.build/
+dist/
+node_modules/
+__pycache__/
+*.pyc
+*.db
+*.db-wal
+*.db-shm
+*.keyinfo
+*.log
+.DS_Store
+.env
+.env.*
+!env.example

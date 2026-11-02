@@ -1,0 +1,33 @@
+name: Publish verified desktop release
+on:
+  workflow_dispatch:
+    inputs:
+      build_run:
+        description: Successful independent desktop build run ID
+        required: true
+      tag:
+        description: Version tag matching package.json
+        required: true
+        default: v2.0.0
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: release-${{ inputs.tag }}
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate reports, checksums and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GROUPPULSE_BUILD_RUN: ${{ inputs.build_run }}
+          GROUPPULSE_RELEASE_TAG: ${{ inputs.tag }}
+          GROUPPULSE_REPOSITORY: ${{ github.repository }}
+        run: python scripts/publish-release.py

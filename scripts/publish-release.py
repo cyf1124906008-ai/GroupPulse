@@ -7,7 +7,9 @@ repo=os.environ['GROUPPULSE_REPOSITORY'];run=os.environ['GROUPPULSE_BUILD_RUN'];
 version=json.loads((ROOT/'package.json').read_text())['version']
 assert re.fullmatch(r'\d+',run) and tag=='v'+version,'Invalid build run or version'
 def gh(*args,check=True):
-    return subprocess.run(['gh',*map(str,args)],capture_output=True,text=True,check=check)
+    result=subprocess.run(['gh',*map(str,args)],capture_output=True,text=True)
+    if check and result.returncode:raise RuntimeError('GitHub '+str(args[0])+' failed: '+result.stderr.strip())
+    return result
 for attempt in range(40):
     build=json.loads(gh('api',f'repos/{repo}/actions/runs/{run}').stdout)
     assert build['event'] in ['push','workflow_dispatch'] and build['path']=='.github/workflows/build.yml','Unexpected source workflow'

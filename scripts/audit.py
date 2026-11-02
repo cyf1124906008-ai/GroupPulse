@@ -8,7 +8,7 @@ FILES=['.gitignore','.gitattributes','package.json','package-lock.json','runtime
 paths=[ROOT/name for name in FILES if (ROOT/name).is_file()]
 for name in FOLDERS:paths.extend(p for p in (ROOT/name).rglob('*') if p.is_file() and '__pycache__' not in p.parts)
 for file in paths:
-    relative=str(file.relative_to(ROOT));assert file.suffix not in ['.db','.keyinfo','.asar'],relative
+    relative=file.relative_to(ROOT).as_posix();assert file.suffix not in ['.db','.keyinfo','.asar'],relative
     assert not any(part in file.parts for part in ['node_modules','third_party','generations']),relative
     assert not file.is_symlink(),relative
     if file.suffix.lower() in ['.png','.ico','.hevc','.wasm']:continue
@@ -18,7 +18,7 @@ for file in paths:
     assert not re.search(r'gh[pousr]_[A-Za-z0-9]{25,}|sk-[A-Za-z0-9]{32,}|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY',value),relative+' may contain a secret'
     if 'src/core/' in relative:assert not re.search(r'WeFlow|TradeBoard|wcdbWorker|main-upstream',value),relative+' depends on a previous application'
 origin=json.loads((ROOT/'vendor/silk-wasm-origin.json').read_text())
-actual={str(p.relative_to(ROOT/'vendor/silk-wasm')):hashlib.sha256(p.read_bytes()).hexdigest() for p in (ROOT/'vendor/silk-wasm').rglob('*') if p.is_file()}
+actual={p.relative_to(ROOT/'vendor/silk-wasm').as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in (ROOT/'vendor/silk-wasm').rglob('*') if p.is_file()}
 assert actual==origin['files'],'Vendor integrity mismatch'
 for name in ['wechat-decrypt-LICENSE.txt','media-reference-MIT-LICENSE.txt','ChatTrace-MIT-LICENSE.txt','SILK-BSD-LICENSE.txt','FFmpeg-LGPL-2.1.txt','zlib-LICENSE.txt','rcedit-MIT-LICENSE.txt']:
     assert (ROOT/'LICENSES'/name).stat().st_size>100,name

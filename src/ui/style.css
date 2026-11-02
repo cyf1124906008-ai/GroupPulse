@@ -8,3 +8,5 @@
 button{white-space:nowrap}button.primary:hover:not(:disabled){background:var(--accent);color:var(--accent-text);filter:brightness(.92)}input::placeholder,textarea::placeholder{color:var(--muted);opacity:1}.thread-list form input{flex:1;width:0;min-width:0}.thread-list form button{flex-shrink:0;padding:6px 9px;font-size:11px}.chat-advanced{margin-bottom:14px}.chat-advanced summary{font-size:11px;color:var(--muted);cursor:pointer}.chat-advanced .filters{margin-top:10px}.media-box audio{width:100%}
 
 .large-preview{display:block;max-width:100%;max-height:75vh;margin:auto;object-fit:contain}.moment-media video{width:min(440px,100%);max-height:440px;border-radius:9px}audio{width:min(340px,100%);margin-top:12px}
+
+.market-metrics{grid-template-columns:repeat(4,minmax(0,1fr))}.advanced-filters{border-top:1px solid var(--line);padding-top:10px;margin-top:4px;color:var(--muted);font-size:12px}.advanced-filters .filters{font-size:14px;color:var(--ink)}

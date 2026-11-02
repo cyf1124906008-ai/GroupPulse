@@ -2,6 +2,7 @@
 (() => {
   const messages = {
     unknownSender:['未识别发送者','Unidentified sender'],
+    moreFilters:['更多筛选：发送者、数值、日期与排序','More filters: sender, values, dates and sort'],
     rawStructure:['原始消息结构','Original message structure'],
     overview:['消息概览','Overview'],search:['消息搜索','Message search'],analysis:['群聊分析','Group analysis'],market:['供需整理','Supply & demand'],prices:['报价统计','Price statistics'],
     chats:['聊天记录','Chat history'],moments:['朋友圈','Moments'],contacts:['通讯录','Contacts'],resources:['资源浏览','Media library'],saved:['收藏与灵感','Saved messages'],reports:['活动报告','Activity reports'],exports:['导出中心','Export center'],settings:['设置','Settings'],

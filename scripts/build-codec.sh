@@ -13,8 +13,10 @@ if [[ "$task_platform" == windows ]]; then
   task_flags+=(--target-os=mingw32 --arch=x86_64 --extra-ldflags=-static)
 fi
 "$task_source/configure" "${task_flags[@]}"
-make -j4 ffmpeg
-./ffmpeg -hide_banner -encoders | grep -q png
+task_executable=ffmpeg
+if [[ "$task_platform" == windows ]]; then task_executable=ffmpeg.exe; fi
+make -j4 "$task_executable"
+./"$task_executable" -hide_banner -encoders | grep -q png
 mkdir -p ../codec-bin
 if [[ "$task_platform" == windows ]]; then cp ffmpeg.exe ../codec-bin/ffmpeg.exe; else cp ffmpeg ../codec-bin/ffmpeg; fi
 printf '%s\n' "${task_flags[@]}" > ../codec-bin/configure-flags.txt

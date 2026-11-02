@@ -205,7 +205,7 @@ app.whenReady().then(async () => {
     } catch { return new Response('', { status: 404 }); }
   });
   const ui = pathToFileURL(path.join(__dirname, 'ui/index.html')).href;
-  window = new BrowserWindow({ title: 'GroupPulse', width: 1420, height: 920, minWidth: 920, minHeight: 640, frame: false, backgroundColor: settings.theme === 'dark' ? '#172735' : '#f4f7fa', icon: path.join(__dirname, '../assets/icon.png'),
+  window = new BrowserWindow({ title: 'GroupPulse', width: 1420, height: 920, minWidth: 920, minHeight: 640, frame: false, enableLargerThanScreen: process.env.GROUPPULSE_CI === '1' && demo, backgroundColor: settings.theme === 'dark' ? '#172735' : '#f4f7fa', icon: path.join(__dirname, '../assets/icon.png'),
     webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, nodeIntegration: false, sandbox: true, webSecurity: true, spellcheck: false } });
   window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
   window.webContents.on('will-navigate', event => event.preventDefault());

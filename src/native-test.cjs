@@ -8,6 +8,7 @@ function install({app,window,handle}){
   for(const name of ['isEncryptionAvailable','encryptString','decryptString'])safeStorage[name]=()=>{keychainCalls++;throw Error('UNEXPECTED_SYSTEM_KEY_ACCESS');};
   const transport=global.fetch;global.fetch=(...args)=>{networkCalls++;throw Error('UNEXPECTED_NETWORK_REQUEST');};
   dialog.showMessageBox=async()=>({response:0});dialog.showSaveDialog=async()=>({canceled:false,filePath:path.join(root,'export-test.csv')});
+  window.setContentSize(1440,1000);
   const checks=[],errors=[];window.webContents.on('render-process-gone',(_,details)=>errors.push(details.reason));
   const page=fn=>window.webContents.executeJavaScript('('+fn.toString()+')()');
   async function screenshot(name){const folder=path.join(root,'screenshots');fs.mkdirSync(folder,{recursive:true});await page(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));fs.writeFileSync(path.join(folder,name+'.png'),(await window.webContents.capturePage()).toPNG());}

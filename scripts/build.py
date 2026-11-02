@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build only the independent source using SHA-256 pinned official Electron."""
 from pathlib import Path
-import argparse, hashlib, json, os, plistlib, shutil, stat, subprocess, urllib.request, zipfile
+import argparse, hashlib, json, os, plistlib, re, shutil, stat, subprocess, urllib.request, zipfile
 ROOT=Path(__file__).resolve().parents[1]
 CACHE=ROOT/'.build/downloads'
 
@@ -26,6 +26,13 @@ def extract(archive,folder):
 
 def build(platform):
     codec=ROOT/'.build/codec-bin'/('ffmpeg.exe' if platform=='windows' else 'ffmpeg')
+    if platform=='macos':
+        os.environ['MACOSX_DEPLOYMENT_TARGET']='12.0'
+        if codec.exists():
+            metadata=subprocess.check_output(['/usr/bin/otool','-l',str(codec)],text=True)
+            minimum=re.search(r'\bminos\s+(\d+(?:\.\d+)*)',metadata)
+            if not minimum or tuple(map(int,minimum.group(1).split('.')[:2]))>(12,0):
+                codec.unlink();shutil.rmtree(ROOT/'.build/codec-macos',ignore_errors=True)
     if not codec.exists():
         if platform=='macos':subprocess.run(['bash',str(ROOT/'scripts/build-codec.sh'),'macos'],cwd=ROOT,check=True)
         else:raise RuntimeError('Build the independent codec with scripts/build-codec.sh windows first')
@@ -54,7 +61,7 @@ def build(platform):
     shutil.copy2(codec,native/codec.name)
     shutil.copy2(ROOT/'.build/codec-bin/configure-flags.txt',native/'ffmpeg-configure.txt')
     if platform=='macos':
-        subprocess.run(['clang','-O2','-dynamiclib',str(ROOT/'native/key_capture.c'),'-o',str(native/'key-capture.dylib')],check=True)
+        subprocess.run(['clang','-mmacosx-version-min=12.0','-O2','-dynamiclib',str(ROOT/'native/key_capture.c'),'-o',str(native/'key-capture.dylib')],check=True)
         iconset=ROOT/'.build/grouppulse.iconset';subprocess.run(['/usr/bin/swift',str(ROOT/'native/icon.swift'),str(iconset)],check=True)
         subprocess.run(['/usr/bin/iconutil','-c','icns',str(iconset),'-o',str(resources/'electron.icns')],check=True)
         subprocess.run(['/usr/bin/codesign','--force','--deep','--sign','-',str(app)],check=True)
@@ -67,7 +74,7 @@ def build(platform):
     for file in ['README.md','LICENSE','NOTICE.md']:
         if (ROOT/file).exists():shutil.copy2(ROOT/file,out/file)
     shutil.copy2(ROOT/'.build/downloads/ffmpeg-8.1.3.tar.xz',out/'ffmpeg-8.1.3.tar.xz')
-    report={'product':'GroupPulse','version':package['version'],'platform':platform,'independent':True,'runtime':spec,'productionNpmDependencies':0,'separateCodec':'FFmpeg 8.1.3, LGPL-2.1-or-later, official unmodified source included; configure flags in app/native','bundledOptionalCodec':'silk-wasm@3.7.1, npm integrity verified','files':{str(file.relative_to(target)):hashlib.sha256(file.read_bytes()).hexdigest() for file in target.rglob('*') if file.is_file()}}
+    report={'product':'GroupPulse','version':package['version'],'platform':platform,'independent':True,'macOSDeploymentTarget':'12.0' if platform=='macos' else None,'runtime':spec,'productionNpmDependencies':0,'separateCodec':'FFmpeg 8.1.3, LGPL-2.1-or-later, official unmodified source included; configure flags in app/native','bundledOptionalCodec':'silk-wasm@3.7.1, npm integrity verified','files':{str(file.relative_to(target)):hashlib.sha256(file.read_bytes()).hexdigest() for file in target.rglob('*') if file.is_file()}}
     (out/'build-report.json').write_text(json.dumps(report,indent=2),encoding='utf8')
     print(str(executable))
     return out

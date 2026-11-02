@@ -33,7 +33,7 @@ jobs:
           path: |
             .build/downloads
             .build/codec-bin
-          key: ${{ runner.os }}-independent-runtime-${{ hashFiles('runtime-inputs.json', 'scripts/build-codec.sh') }}
+          key: ${{ runner.os }}-${{ matrix.platform == 'macos' && 'target12' || 'default' }}-independent-runtime-${{ hashFiles('runtime-inputs.json', 'scripts/build-codec.sh') }}
       - run: node --test tests/engine.test.cjs tests/integrity.test.cjs
       - run: python scripts/audit.py
       - uses: msys2/setup-msys2@v2

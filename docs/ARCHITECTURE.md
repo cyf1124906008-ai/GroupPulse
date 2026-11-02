@@ -19,7 +19,7 @@ GroupPulse 2.x has its own Electron main process, sandboxed preload bridge, HTML
 
 ## Build
 
-Use Node 24.17+ (24.x) and Python 3.9+. On macOS use Apple Silicon and Xcode Command Line Tools. `python3 scripts/build.py --platform macos` builds the separate minimal FFmpeg first, then verifies and assembles the official Electron runtime. It applies a local ad-hoc signature, not a Developer ID or notarization.
+Use Node 24.17+ (24.x) and Python 3.9+. On macOS use Apple Silicon and Xcode Command Line Tools. `python3 scripts/build.py --platform macos` builds the separate minimal FFmpeg first, then verifies and assembles the official Electron runtime. The macOS codec and initialization helper target macOS 12.0 to match the bundled runtime minimum. It applies a local ad-hoc signature, not a Developer ID or notarization.
 
 On Windows use an MSYS2 MINGW64 shell with `make`, `mingw-w64-x86_64-gcc` and `mingw-w64-x86_64-zlib`, plus Node/Python on PATH:
 
